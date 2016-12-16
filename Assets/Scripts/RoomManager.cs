@@ -170,12 +170,12 @@ public class RoomManager : MonoBehaviour
 
     private void OnClickAction()
     {
+        EventManager.TriggerEvent("blockInputs");
         switch (GetExceptionType(_currentSceneIndex))
         {
             case SceneType.TimedAndUnskippable:
                 break;
             case SceneType.ClickToSkip:
-                EventManager.TriggerEvent("blockInputs");
                 _audioSource.Play();
                 ChangeToNextRoom();
                 break;
@@ -215,6 +215,7 @@ public class RoomManager : MonoBehaviour
         
         //code used to get scenes loop
         int nextSceneIndex = (_currentSceneIndex+1) % _sceneCount;
+        if (nextSceneIndex == 0) nextSceneIndex++; //skip first scene
 
         EventManager.TriggerEvent("fadeOut");
         _currentSceneIndex = nextSceneIndex;
@@ -252,7 +253,6 @@ public class RoomManager : MonoBehaviour
             if (changingScene.progress >= 0.9f) // NECESSARY EVIL
             {
                 Debug.Log("loaded!!");
-                StartCoroutine(DelayedResumeInputs());
                 changingScene.allowSceneActivation = true;
                 break;
             }
@@ -268,7 +268,8 @@ public class RoomManager : MonoBehaviour
 
     private IEnumerator DelayedResumeInputs()
     {
-        yield return new WaitForSeconds(2.5f);
+        Debug.Log("delayed resume");
+        yield return new WaitForSeconds(2f);
         EventManager.TriggerEvent("resumeInputs");
     }
 

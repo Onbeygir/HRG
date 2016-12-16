@@ -55,13 +55,13 @@ public class CameraEffetsManager : MonoBehaviour
 
     public void OnFadeIn()
     {
-        Debug.Log("start fade in");
+        //Debug.Log("start fade in");
         StartCoroutine(FadeIn());
     }
 
     public void OnFadeOut()
     {
-        Debug.Log("start fade out");
+        //Debug.Log("start fade out");
         StartCoroutine(FadeIn(true));
     }
 
