@@ -35,7 +35,10 @@ public class RoomManager : MonoBehaviour
     }
     
     [Tooltip("Add scene exceptions by increasing array size, choosing the exception type and scene index. ClickToSkip is default, not needed to add as an exception. No duplicated indexes allowed")]
-    [SerializeField] private SceneException[] _sceneExceptions;
+    
+	[Header("SCENE EXCEPTIONS")] 
+
+	[SerializeField] private SceneException[] _sceneExceptions;
 
     [SerializeField] private bool _scenesLoop = true;
 
